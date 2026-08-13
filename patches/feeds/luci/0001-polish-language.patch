@@ -1,21 +1,13 @@
 diff --git a/luci.mk b/luci.mk
-index 0000000..1111111 100644
 --- a/luci.mk
 +++ b/luci.mk
-@@ -35,6 +35,7 @@ LUCI_LANG.nl=Nederlands (Dutch)
- LUCI_LANG.pl=Polski (Polish)
- LUCI_LANG.pt_BR=Português do Brasil (Brazilian Portuguese)
- LUCI_LANG.pt=Português (Portuguese)
-+
-@@ -140,6 +141,8 @@ ifeq ($(PKG_NAME),luci-base)
+@@ -140,7 +140,7 @@ ifeq ($(PKG_NAME),luci-base)
  
         menu "Translations"$(foreach lang,$(LUCI_LANGUAGES),$(if $(LUCI_LANG.$(lang)),
  
           config LUCI_LANG_$(lang)
-            tristate "$(shell echo '$(LUCI_LANG.$(lang))' | sed -e 's/^.* (\(.*\))$$/\1/') ($(lang))")
-+
-+         config LUCI_LANG_pl
-+           default y
+-           tristate "$(shell echo '$(LUCI_LANG.$(lang))' | sed -e 's/^.* (\(.*\))$$/\1/') ($(lang))")
++           tristate "$(shell echo '$(LUCI_LANG.$(lang))' | sed -e 's/^.* (\(.*\))$$/\1/') ($(lang))"$(if $(filter pl,$(lang)),\n\t\t\tdefault y,))
  
         endmenu
       endef
