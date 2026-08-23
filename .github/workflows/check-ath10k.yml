@@ -1,0 +1,55 @@
+name: Check AX3600 ath10k support
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout builder
+        uses: actions/checkout@v4
+
+      - name: Checkout OpenWrt NSS
+        run: |
+          git clone --depth=1 \
+            --branch nss-edma-rework \
+            https://github.com/JuliusBairaktaris/openwrt-nss-edma.git \
+            openwrt
+
+      - name: Add NSS feed
+        working-directory: openwrt
+        run: |
+          cp feeds.conf.default feeds.conf
+          echo "src-git nss https://github.com/JuliusBairaktaris/nss-packages.git;edma-nss" >> feeds.conf
+
+      - name: Update feeds
+        working-directory: openwrt
+        run: |
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+
+      - name: Search ath10k packages
+        working-directory: openwrt
+        run: |
+          echo "===== ATH10K FILES ====="
+          find package feeds -type f 2>/dev/null | grep -i ath10k || true
+
+          echo "===== ATH10K CONFIG SYMBOLS ====="
+          grep -R "ATH10K" package feeds 2>/dev/null | head -100 || true
+
+          echo "===== QCA9887 ====="
+          grep -R "qca9887" package feeds 2>/dev/null | head -100 || true
+
+      - name: Test AX3600 config
+        run: |
+          cp devices/xiaomi_ax3600/config openwrt/.config
+          cd openwrt
+          make defconfig
+
+      - name: Show resulting ath10k config
+        working-directory: openwrt
+        run: |
+          echo "===== RESULTING CONFIG ====="
+          grep -E "ATH10K|ath10k|QCA9887" .config || true
