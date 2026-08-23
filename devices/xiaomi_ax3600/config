@@ -14,7 +14,7 @@ CONFIG_TARGET_qualcommax_ipq807x_DEVICE_xiaomi_ax3600=y
 CONFIG_ATH10K-CT_LEDS=y
 CONFIG_PACKAGE_ath10k-board-qca9887=y
 CONFIG_PACKAGE_ath10k-firmware-qca9887=y
-CONFIG_PACKAGE_kmod-ath10k-ct-smallbuffers=y
+CONFIG_PACKAGE_kmod-ath10k-ct=y
 
 
 ## Compiler and Toolchain Optimization
