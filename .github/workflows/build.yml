@@ -29,7 +29,7 @@ env:
   TARGET: qualcommax/ipq807x
   DEVICE: xiaomi_ax3600
   VARIANT: edma-nss
-  RELEASE_PREFIX: edma-nss
+  RELEASE_PREFIX: edma-nss-mesh
   KEEP: "2"                     # newest releases to retain
   FEEDS: "src-git nss https://github.com/JuliusBairaktaris/nss-packages.git;edma-nss"
 
