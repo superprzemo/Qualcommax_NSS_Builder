@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   # Only what goes into an image: the site, prune and stats scripts do not.
   push:
-    branches: [main]
+    branches: [ppe-nss]
     paths:
       - 'devices/**'
       - 'patches/**'
