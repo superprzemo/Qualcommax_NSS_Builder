@@ -1,0 +1,26 @@
+{
+ "latest": "ppe-nss-20261103T132939Z-41644773910",
+ "releases": [
+  {
+   "tag": "ppe-nss-20261103T132939Z-41644773910",
+   "time": 1793729826,
+   "groups": [
+    "xiaomi_ax3600"
+   ]
+  }
+ ],
+ "flavours": {
+  "ppe-nss": {
+   "latest": "ppe-nss-20261103T132939Z-41644773910",
+   "releases": [
+    {
+     "tag": "ppe-nss-20261103T132939Z-41644773910",
+     "time": 1793729826,
+     "groups": [
+      "xiaomi_ax3600"
+     ]
+    }
+   ]
+  }
+ }
+}
