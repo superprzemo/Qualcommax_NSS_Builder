@@ -1,32 +1,21 @@
 #
-# Xiaomi AX3600 (IPQ8071A, 512 MB) — the reference build.
+# Xiaomi AX3600 (IPQ8071A, 512 MB) — custom PPE-NSS build.
 #
 # Concatenated onto devices/common/config by prepare-build.sh.
-#
 
 CONFIG_TARGET_qualcommax_ipq807x=y
 CONFIG_TARGET_qualcommax_ipq807x_DEVICE_xiaomi_ax3600=y
 
-## The QCA9887 IoT radio is not used by this build. Its kmods stay modules, so
-## the image's kmod feed carries them for whoever adds the radio; =n would drop
-## them from the feed, where nothing else can serve this kernel.
-CONFIG_ATH10K-CT_LEDS=n
-CONFIG_PACKAGE_ath10k-board-qca9887=n
-CONFIG_PACKAGE_ath10k-firmware-qca9887=n
-CONFIG_PACKAGE_ath10k-firmware-qca9887-ct=n
-CONFIG_PACKAGE_kmod-ath10k-ct-smallbuffers=m
-
-## Hardware this board does not have.
-CONFIG_PACKAGE_kmod-phy-aquantia=m
-
-
-## QCA9887 PCIe radio — this AX3600 uses the third radio for IoT.
-## Build the driver and firmware into the image, not only into the kmod feed.
+## QCA9887 PCIe radio — the AX3600 uses its third radio for IoT.
+## Include driver and firmware in the image, not only in the kmod feed.
 CONFIG_ATH10K-CT_LEDS=y
 CONFIG_PACKAGE_ath10k-board-qca9887=y
 CONFIG_PACKAGE_ath10k-firmware-qca9887=y
 CONFIG_PACKAGE_ath10k-firmware-qca9887-ct=n
 CONFIG_PACKAGE_kmod-ath10k-ct-smallbuffers=y
+
+## Hardware this board does not have; keep its module in the build feed.
+CONFIG_PACKAGE_kmod-phy-aquantia=m
 
 ## Polish LuCI
 CONFIG_LUCI_LANG_pl=y
